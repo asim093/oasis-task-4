@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f8f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 320px;
+            max-width: 100%;
+            color: #fff;
+            user-select: none;
+        }
+
+        .screen {
+            font-size: 2em;
+            padding: 20px;
+            text-align: right;
+            border-bottom: 1px solid #303030;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+        }
+
+        button {
+            font-size: 1.5em;
+            padding: 20px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            background-color: #242424;
+            transition: background-color 0.3s, color 0.3s;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        button:active {
+            background-color: #1e1e1e;
+        }
+
+        button.operator {
+            background-color: #ff9500;
+            color: #1e1e1e;
+        }
+
+        button.double {
+            grid-column: span 2;
+        }
+
+        button.clear {
+            background-color: #ff3b30;
+        }
+
+        button:hover {
+            background-color: #303030;
+        }
+    </style>
+    <title>Beautiful Calculator</title>
+</head>
+<body>
+
+<div class="calculator">
+    <div class="screen" id="screen">0</div>
+    <div class="buttons" onclick="handleButtonClick(event)">
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button class="operator">/</button>
+
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button class="operator">*</button>
+
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button class="operator">-</button>
+
+        <button class="double">0</button>
+        <button>.</button>
+        <button class="operator">+</button>
+        <button class="operator double">=</button>
+
+        <button class="clear double">C</button>
+    </div>
+</div>
+
+<script>
+    function handleButtonClick(event) {
+        const screen = document.getElementById('screen');
+        const buttonValue = event.target.innerText;
+
+        if (buttonValue === 'C') {
+            screen.innerText = '0';
+        } else if (buttonValue === '=') {
+            try {
+                screen.innerText = eval(screen.innerText);
+            } catch (error) {
+                screen.innerText = 'Error';
+            }
+        } else {
+            if (screen.innerText === '0' || screen.innerText === 'Error') {
+                screen.innerText = buttonValue;
+            } else {
+                screen.innerText += buttonValue;
+            }
+        }
+    }
+
+   
+</script>
+
+</body>
+</html>
